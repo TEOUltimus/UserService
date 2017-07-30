@@ -11,9 +11,9 @@ import java.io.IOException;
  */
 public class Server implements Runnable {
     // The port the server accepts incoming connections on.
-	private int serverPort = 8080;
-	
-	// The socket the sever uses to accept incoming connections. 
+    private int serverPort = 8080;
+    
+    // The socket the sever uses to accept incoming connections. 
     private ServerSocket serverSocket = null;
     
     // Has the server been instructed to stop accepting incoming requests?
@@ -35,10 +35,10 @@ public class Server implements Runnable {
         
         while (!isStopped) {
             try {
-            	// Spin up a thread to accept an incoming request.
-            	new Thread(new Request(serverSocket.accept(), "Multithreaded Server")).start();
+                // Spin up a thread to accept an incoming request.
+                new Thread(new Request(serverSocket.accept(), "Multithreaded Server")).start();
             } catch (IOException e) {
-            	// Only handle a failure if the server is still running.
+                // Only handle a failure if the server is still running.
                 if (!isStopped) {
                     throw new RuntimeException("Error accepting client connection", e);
                 }
@@ -67,5 +67,7 @@ public class Server implements Runnable {
         } catch (IOException e) {
             throw new RuntimeException("Cannot open port " + serverPort, e);
         }
+        
+        System.out.println("Server Started.");
     }
 }

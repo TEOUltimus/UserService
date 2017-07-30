@@ -11,7 +11,7 @@ import java.net.Socket;
  * An object that handles a single request made to the Server.
  */
 public class Request implements Runnable {
-	// The socket which accepted the incoming connection.
+    // The socket which accepted the incoming connection.
     private Socket clientSocket = null;
     
     // Message the server should respond with/
@@ -23,6 +23,7 @@ public class Request implements Runnable {
      * @param text The text to reply with.
      */
     public Request(Socket socket, String text) {
+        System.out.println("Request made. ");
         clientSocket = socket;
         serverText = text;
     }
@@ -31,7 +32,7 @@ public class Request implements Runnable {
      * Responds to the client who made the request.
      */
     public void run() {
-    	// Ensure the streams will be closed correctly regardless of success.
+        // Ensure the streams will be closed correctly regardless of success.
         try (InputStream input = clientSocket.getInputStream();
                 OutputStream output = clientSocket.getOutputStream();) {
             long time = System.currentTimeMillis();
@@ -39,7 +40,7 @@ public class Request implements Runnable {
                         
             System.out.println("Request processed: " + time);
         } catch (IOException e) {
-        	// TODO fail gracefully
+            // TODO fail gracefully
             e.printStackTrace();
         }
     }
